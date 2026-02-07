@@ -30,6 +30,23 @@ const SideFormatter = (props: CustomCellRendererProps) => {
   );
 };
 
+const ActionFormatter = (props: CustomCellRendererProps) => {
+  const { data } = props;
+  return (
+    <Button
+      size="sm"
+      variant="outline"
+      onClick={() =>
+        prompt(
+          `Leave a comment for ${data.stock_name} (${data.stock_symbol}) trade with id ${data.id}`,
+        )
+      }
+    >
+      Leave a comment
+    </Button>
+  );
+};
+
 const GridExample = () => {
   // generate 10000 trades for the grid to demonstrate performance with large datasets
   const rowData = useMemo(() => generateTrades(10), []);
@@ -42,17 +59,33 @@ const GridExample = () => {
       headerName: "Time",
       valueFormatter: (params) =>
         new Date(params.value).toLocaleString().replace(", ", " - "),
+      filter: "agTextColumnFilter",
     },
-    { field: "stock_symbol", headerName: "Stock Symbol" },
-    { field: "stock_name", headerName: "Stock Name" },
-    { field: "quantity", headerName: "Quantity" },
+    {
+      field: "stock_symbol",
+      headerName: "Stock Symbol",
+      filter: "agTextColumnFilter",
+    },
+    {
+      field: "stock_name",
+      headerName: "Stock Name",
+      filter: "agTextColumnFilter",
+    },
+
+    {
+      field: "quantity",
+      headerName: "Quantity",
+      filter: "agNumberColumnFilter",
+    },
     {
       field: "price",
       headerName: "Price",
       valueFormatter: (params) => `$${params.value}`,
+      filter: "agTextColumnFilter",
     },
     { field: "side", headerName: "Side", cellRenderer: SideFormatter },
-    { field: "status", headerName: "Status" },
+    { field: "status", headerName: "Status", filter: "agTextColumnFilter" },
+    { field: "action", headerName: "Action", cellRenderer: ActionFormatter },
   ];
 
   const defaultColDef = {
