@@ -1,11 +1,11 @@
-import generateTrades from "@/data/generateTrades";
+import generateTrades, { type Trade } from "@/data/generateTrades";
 import {
   AllCommunityModule,
   ModuleRegistry,
   type ColDef,
 } from "ag-grid-community";
 import { AgGridReact, type CustomCellRendererProps } from "ag-grid-react";
-import { useMemo } from "react";
+import { useMemo, useRef } from "react";
 import { Button } from "@/components/ui/button";
 
 // Register Grid Community features
@@ -48,6 +48,8 @@ const ActionFormatter = (props: CustomCellRendererProps) => {
 };
 
 const GridExample = () => {
+  const gridRef = useRef<AgGridReact<Trade>>(null);
+
   // generate 10000 trades for the grid to demonstrate performance with large datasets
   const rowData = useMemo(() => generateTrades(10), []);
 
@@ -93,8 +95,15 @@ const GridExample = () => {
   };
 
   return (
-    <div className="h-screen w-full">
+    <div className="h-screen w-full flex flex-col gap-4">
+      <div className="flex justify-end">
+        <Button onClick={() => gridRef.current!.api?.setFilterModel(null)}>
+          Reset Filters
+        </Button>
+      </div>
+
       <AgGridReact
+        ref={gridRef}
         rowData={rowData}
         columnDefs={colomnDefs}
         defaultColDef={defaultColDef}
