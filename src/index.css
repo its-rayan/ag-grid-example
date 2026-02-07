@@ -122,3 +122,23 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Override AG Grid styles */
+.ag-root-wrapper {
+  @apply bg-neutral-800 border-neutral-900 rounded-lg;
+}
+
+.ag-root,
+.ag-header,
+.ag-body,
+[class^="ag-row"] {
+  @apply bg-neutral-900 text-neutral-300;
+}
+
+.ag-header {
+  @apply bg-neutral-800 text-neutral-400;
+}
+
+[class^="ag-row"] {
+  @apply even:bg-neutral-800;
+}
