@@ -4,11 +4,31 @@ import {
   ModuleRegistry,
   type ColDef,
 } from "ag-grid-community";
-import { AgGridReact } from "ag-grid-react";
+import { AgGridReact, type CustomCellRendererProps } from "ag-grid-react";
 import { useMemo } from "react";
+import { Button } from "@/components/ui/button";
 
 // Register Grid Community features
 ModuleRegistry.registerModules([AllCommunityModule]);
+
+const SideFormatter = (props: CustomCellRendererProps) => {
+  const side = props.value as string;
+  return (
+    <Button
+      size="sm"
+      className={
+        side === "Buy"
+          ? "bg-green-500 text-white hover:bg-green-600"
+          : "bg-red-500 text-white hover:bg-red-600"
+      }
+      onClick={() =>
+        confirm(`Are you sure you want to ${side} ${props.data.stock_name}?`)
+      }
+    >
+      {side}
+    </Button>
+  );
+};
 
 const GridExample = () => {
   // generate 10000 trades for the grid to demonstrate performance with large datasets
@@ -31,6 +51,7 @@ const GridExample = () => {
       headerName: "Price",
       valueFormatter: (params) => `$${params.value}`,
     },
+    { field: "side", headerName: "Side", cellRenderer: SideFormatter },
     { field: "status", headerName: "Status" },
   ];
 

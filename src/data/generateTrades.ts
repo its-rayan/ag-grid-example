@@ -1,5 +1,5 @@
 import { faker } from "@faker-js/faker";
-import { STATUS_OPTIONS, STOCK_TICKERS } from "./constants";
+import { SIDE, STATUS_OPTIONS, STOCK_TICKERS } from "./constants";
 
 export type Status =
   | "New"
@@ -8,6 +8,8 @@ export type Status =
   | "Cancelled"
   | "Rejected";
 
+export type Side = "Buy" | "Sell";
+
 export interface Trade {
   id: string;
   time: Date;
@@ -15,6 +17,7 @@ export interface Trade {
   stock_name: string;
   quantity: number;
   price: number;
+  side: Side;
   status: Status;
 }
 
@@ -48,6 +51,9 @@ export default function generateTrades(
     // select a random status
     const status = selectRandomFrom(STATUS_OPTIONS);
 
+    // select a random side
+    const side = selectRandomFrom(SIDE);
+
     // create a trade object
     const trade: Trade = {
       id: faker.string.uuid(),
@@ -56,6 +62,7 @@ export default function generateTrades(
       stock_name: stock.name,
       quantity: generateRandomQuantity(),
       price: parseFloat(generateRandomPrice().toFixed(2)),
+      side: side as Side,
       status: status as Status,
     };
 

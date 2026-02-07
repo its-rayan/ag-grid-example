@@ -37,3 +37,5 @@ export const STATUS_OPTIONS = [
   "Cancelled",
   "Rejected",
 ];
+
+export const SIDE = ["Buy", "Sell"];
