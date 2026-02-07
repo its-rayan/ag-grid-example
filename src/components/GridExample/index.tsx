@@ -1,10 +1,16 @@
+import generateTrades from "@/data/generateTrades";
 import { AllCommunityModule, ModuleRegistry } from "ag-grid-community";
-// Register all Community features
+import { AgGridReact } from "ag-grid-react";
+import { useMemo } from "react";
+
+// Register Grid Community features
 ModuleRegistry.registerModules([AllCommunityModule]);
 
-import { AgGridReact } from "ag-grid-react";
-
 const GridExample = () => {
+  // generate 10000 trades for the grid to demonstrate performance with large datasets
+  const rowData = useMemo(() => generateTrades(), []);
+  console.log({ rowData });
+
   const defaultColDef = {
     flex: 1,
   };
@@ -13,19 +19,23 @@ const GridExample = () => {
   return (
     <div className="h-screen w-full">
       <AgGridReact
-        rowData={[
-          { make: "Tesla", model: "Model Y", price: 64950, electric: true },
-          { make: "Ford", model: "F-Series", price: 33850, electric: false },
-          { make: "Toyota", model: "Corolla", price: 29600, electric: false },
-          { make: "Mercedes", model: "EQA", price: 48890, electric: true },
-          { make: "Fiat", model: "500", price: 15774, electric: false },
-          { make: "Nissan", model: "Juke", price: 20675, electric: false },
-        ]}
+        rowData={rowData}
         columnDefs={[
-          { field: "make" },
-          { field: "model" },
-          { field: "price" },
-          { field: "electric" },
+          { field: "id", headerName: "ID" },
+          {
+            field: "time",
+            headerName: "Time",
+            valueFormatter: (params) => new Date(params.value).toLocaleString(),
+          },
+          { field: "stock_symbol", headerName: "Stock Symbol" },
+          { field: "stock_name", headerName: "Stock Name" },
+          { field: "quantity", headerName: "Quantity" },
+          {
+            field: "price",
+            headerName: "Price",
+            valueFormatter: (params) => `$${params.value}`,
+          },
+          { field: "status", headerName: "Status" },
         ]}
         defaultColDef={defaultColDef}
       />
