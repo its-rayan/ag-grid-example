@@ -87,7 +87,12 @@ const GridExample = () => {
     },
     { field: "side", headerName: "Side", cellRenderer: SideFormatter },
     { field: "status", headerName: "Status", filter: "agTextColumnFilter" },
-    { field: "action", headerName: "Action", cellRenderer: ActionFormatter },
+    {
+      field: "action",
+      headerName: "Action",
+      cellRenderer: ActionFormatter,
+      sortable: false,
+    },
   ];
 
   const defaultColDef = {
