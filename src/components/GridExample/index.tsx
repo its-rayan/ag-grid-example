@@ -51,7 +51,7 @@ const GridExample = () => {
   const gridRef = useRef<AgGridReact<Trade>>(null);
 
   // generate 10000 trades for the grid to demonstrate performance with large datasets
-  const rowData = useMemo(() => generateTrades(10), []);
+  const rowData = useMemo(() => generateTrades(), []);
 
   // Define the columns to be rendered in the grid, along with any custom formatting for the values.
   const colomnDefs: ColDef[] = [
@@ -61,7 +61,7 @@ const GridExample = () => {
       headerName: "Time",
       valueFormatter: (params) =>
         new Date(params.value).toLocaleString().replace(", ", " - "),
-      filter: "agTextColumnFilter",
+      filter: "agDateColumnFilter",
     },
     {
       field: "stock_symbol",

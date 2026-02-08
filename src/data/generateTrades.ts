@@ -12,7 +12,7 @@ export type Side = "Buy" | "Sell";
 
 export interface Trade {
   id: string;
-  time: Date;
+  time: string;
   stock_symbol: string;
   stock_name: string;
   quantity: number;
@@ -57,7 +57,7 @@ export default function generateTrades(
     // create a trade object
     const trade: Trade = {
       id: faker.string.uuid(),
-      time: faker.date.recent({ days: 30 }),
+      time: faker.date.recent({ days: 30 }).toISOString(),
       stock_symbol: stock.symbol,
       stock_name: stock.name,
       quantity: generateRandomQuantity(),

@@ -140,5 +140,5 @@
 }
 
 [class^="ag-row"] {
-  @apply even:bg-neutral-800;
+  @apply border-neutral-700;
 }
