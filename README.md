@@ -1,73 +1,73 @@
-# React + TypeScript + Vite
+# AG Grid Demo
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This a small project built with **React, TypeScript, and AG Grid** to demonstrates how AG Grid is typically used to display, explore, and analyse large volumes of transactional data.
 
-Currently, two official plugins are available:
+![Demo Screenshot](./public/screenshot.jpeg)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Live Demo
 
-## React Compiler
+A deployed version of the project is available here:
+**https://admirable-phoenix-6b7763.netlify.app/**
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech Stack
 
-## Expanding the ESLint configuration
+- Vite
+- React
+- TypeScript
+- AG Grid (Community)
+- @faker-js/faker (mock data)
+- ShadCN
+- TailwindCSS
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Get started
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Install npm dependencies
 
 ```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+npm install
 ```
+
+Run development server
+
+```js
+npm run dev
+```
+
+The application will be served on `http://localhost:5173`.
+
+## Mock Data Strategy
+
+Mock trade data is generated using **@faker-js/faker**. The focus is on **grid behavior and interaction**, not data sourcing. See `src/data/generateTrades.ts` file.
+
+## Features Demonstrated (Community)
+
+### AG Grid Core Usage
+
+- Column definitions
+- Client-side row model (10,000 rows are generated client-side)
+- Sorting by column
+- Column resizing
+
+### Filtering (Domain-Appropriate)
+
+Each column uses a filter suited to its data:
+
+- Text filters
+- Number filters
+- Date filter
+
+### Formatting
+
+- Currency formatting for price
+- Date formatting for readability
+
+### Custom Cell Renderers & Styling
+
+Custom components rendered for:
+
+- Side (BUY / SELL) column
+- Action column
+
+### Custom Styling with TailwindCSS
+
+Default CSS overriden using TailwindCSS
