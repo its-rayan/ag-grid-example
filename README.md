@@ -1,6 +1,6 @@
 # AG Grid Demo
 
-This a small project built with **React, TypeScript, and AG Grid** to demonstrates how AG Grid is typically used to display, explore, and analyse large volumes of transactional data.
+This is a small project built with **React, TypeScript, and AG Grid** to demonstrate how AG Grid is used to display, explore, and analyse large volumes of data.
 
 ![Demo Screenshot](./public/screenshot.jpeg)
 
@@ -37,7 +37,7 @@ The application will be served on `http://localhost:5173`.
 
 ## Mock Data Strategy
 
-Mock trade data is generated using **@faker-js/faker**. The focus is on **grid behavior and interaction**, not data sourcing. See `src/data/generateTrades.ts` file.
+Mock trade data is generated using **@faker-js/faker**. The focus is on **grid behaviour and interaction**, not data sourcing. See `src/data/generateTrades.ts` file.
 
 ## Features Demonstrated (Community)
 
